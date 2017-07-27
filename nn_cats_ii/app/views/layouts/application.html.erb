@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NinetyNineCatsDay1</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<h2><a href="/">99cats Rental!</a></h2>
+
+<% button_text = current_user ? "Logout" : "Login" %>
+<% username = current_user ? current_user.user_name : " to 99Cats! " %>
+<% method = current_user ? "DELETE" : "POST" %>
+
+
+  <form class="login_form" action="<%= session_url %>" method="post">
+    <h3>Welcome <%= username %></h3>
+    <input type="hidden" name="_method" value="<%= method %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <% if !current_user %>
+      <label for="username">Username</label>
+      <input id="username" type="text" name="user[user_name]" value="">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="user[password]" value="">
+    <% end %>
+    <input class="button" type="submit" name="" value="<%= button_text %>">
+    <% if !current_user %>
+      <a class="button" href="<%= new_user_url %>">Sign Up</a>
+    <% end %>
+  </form>
+
+
+
+<% if flash.now[:errors] %>
+  <%= flash.now[:errors] %>
+<% end %>
+<%= yield %>
+
+</body>
+</html>

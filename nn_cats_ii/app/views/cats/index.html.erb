@@ -1,0 +1,9 @@
+<h1>Cats upon cats!</h1>
+
+<ul class="cats">
+  <% @cats.each do |cat| %>
+    <li style="background-image: url(http://thecatapi.com/api/images/get?format=src)"><a href="<%= cat_url(cat) %>"><%= cat.name %></a></li>
+  <% end %>
+</ul>
+
+<% debugger %>
